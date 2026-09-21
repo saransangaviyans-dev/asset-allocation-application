@@ -1,4 +1,4 @@
-package com.dev.application.Repository;
+package com.dev.application.repository;
 
 import com.dev.application.entity.Allocation;
 import org.springframework.data.jpa.repository.JpaRepository;

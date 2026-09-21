@@ -17,6 +17,6 @@ public class Asset {
     @Column(unique=true)
     private String serialNumber;
 
-    private String Category;
+    private String category;
     private String status;
     }
