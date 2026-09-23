@@ -39,4 +39,4 @@ public class AssetRequestController {
             @RequestParam Long assetId) {
         return requestService.approveRequest(adminId, requestId, assetId);
     }
-}
+}http://localhost:5174/

@@ -1,122 +1,49 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import "./index.css";
+import { useState } from "react";
+import EmployeeDashboard from "./components/EmployeeDashboard";
+import AdminDashboard from "./components/AdminDashboard";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentUser, setCurrentUser] = useState({ id: 6, role: "EMPLOYEE" });
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="min-h-screen bg-gray-50 font-sans text-gray-800">
+      {/* Clean Professional Navbar */}
+      <nav className="bg-blue-600 text-white shadow-md py-4 px-8 flex justify-between items-center">
+        <h1 className="text-2xl font-bold tracking-wide">
+          Asset Allocation Platform
+        </h1>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+        <div className="flex items-center gap-3 bg-blue-700 px-3 py-1.5 rounded-md border border-blue-500">
+          <label className="text-sm font-medium text-blue-100">
+            Simulated Role:{" "}
+          </label>
+          <select
+            className="bg-white text-gray-900 border-none rounded text-sm p-1 focus:ring-2 focus:ring-blue-300"
+            value={currentUser.role}
+            onChange={(e) =>
+              setCurrentUser({
+                id: e.target.value === "ADMIN" ? 1 : 6,
+                role: e.target.value,
+              })
+            }
+          >
+            <option value="EMPLOYEE">Employee (ID: 6)</option>
+            <option value="ADMIN">Admin (ID: 1)</option>
+          </select>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      </nav>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {/* Main Content Area */}
+      <main className="max-w-6xl mx-auto mt-8 px-4">
+        {currentUser.role === "ADMIN" ? (
+          <AdminDashboard currentUser={currentUser} />
+        ) : (
+          <EmployeeDashboard currentUser={currentUser} />
+        )}
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
